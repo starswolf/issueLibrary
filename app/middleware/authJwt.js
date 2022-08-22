@@ -25,7 +25,7 @@ isAdmin = (req, res, next) => {
             res.status(500).send({ message: err.message })
             return console.error(err.message)
         }
-        if (rows.length === 1 && rows[0].privilege === 3) {
+        if (rows.length === 1 && rows[0].type === 1) {
             next()
             return
         }
@@ -52,7 +52,7 @@ isAdminOrOwnUser = (req, res, next) => {
             res.status(500).send({ message: err.message })
             return console.error(err.message)
         }
-        if (rows.length === 1 && rows[0].privilege === 3) {
+        if (rows.length === 1 && rows[0].type === 1) {
             next()
             return
         }

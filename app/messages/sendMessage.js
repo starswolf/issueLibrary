@@ -57,7 +57,7 @@ async function openBrowser(timeoutArr, redArr, orangeArr) {
 }
 
 function sendMessage() {
-    console.log('Start!')
+    console.log('开始查找有过期风险的案件')
     const sql = 'SELECT * FROM issue WHERE status != -1 ORDER BY id'
     database.all(sql, [], (err, rows = []) => {
         if (err) {
@@ -77,6 +77,7 @@ function sendMessage() {
                 orangeArr.push(row.issueName)
             }
         })
+        console.log('查找完成，开始发送短信')
         openBrowser(timeoutArr, redArr, orangeArr)
     })
 }

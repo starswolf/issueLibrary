@@ -28,10 +28,21 @@ app.listen(PORT, () => {
 
 const { sendMessage } = require('./app/messages/sendMessage')
 
+const curTime = new Date()
+const start = curTime.getTime()
+let span = 0
+if (curTime.getHours() < 10) {
+    const end = curTime.setHours(10, 0, 0, 0)
+    if (end >= start) {
+        span = end - start
+    }
+} else {
+    const tomorrow = curTime.setDate(curTime.getDate() + 1)
+    const end = new Date(tomorrow).setHours(10, 0, 0, 0)
+    span = end - start
+}
+
 setTimeout(() => {
-    // console.log('Start')
-    // setInterval(() => {
-    //     console.log('OK!')
-    // }, 20000)
+    console.log('开始准备发送短信')
     sendMessage()
-}, 10000)
+}, span)
